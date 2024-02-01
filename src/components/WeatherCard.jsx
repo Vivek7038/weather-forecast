@@ -10,7 +10,7 @@ const WeatherCard = () => {
             <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-white-400 h-24 w-24">
              <img src="https://openweathermap.org/img/wn/03d@2x.png" className="w-[100px] h-auto" alt="" />
             </div>
-            <div className="flex flex-row items-center justify-center mt-6">
+            <div className="flex flex-row items-center justify-center mt-6 ">
               <div className="font-medium text-6xl text-white">24°C</div>
               <div className="flex flex-col items-center ml-6 text-white">
                 <div>Cloudy</div>
@@ -28,7 +28,7 @@ const WeatherCard = () => {
                 </div>
               </div>
             </div>
-            <div className="flex flex-row justify-between mt-6 text-white">
+            <div className="flex flex-row justify-between mt-6 text-white pb-4">
               <div className="flex flex-col items-center ">
                 <div className="font-medium text-sm">Wind Speed</div>
                 <div className="text-sm text-gray-500">9k/h</div>
