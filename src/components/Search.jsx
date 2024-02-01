@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
-const Search = ({searchTerm,setSearchTerm}) => {
+const Search = ({searchTerm,setSearchTerm,handleSearch}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = (event) => {
@@ -15,9 +15,7 @@ const Search = ({searchTerm,setSearchTerm}) => {
     setIsFocused(false);
   };
 
-  const handleSearch = () => {
-  
-  };
+
 
   return (
     <>
@@ -37,7 +35,7 @@ const Search = ({searchTerm,setSearchTerm}) => {
             className="w-full h-12 px-4 py-2 border rounded-md outline-none focus:ring-transparent"
           />
           <div className="absolute top-0 right-0 h-full flex items-center pr-4">
-              <IoSearchSharp />
+              <IoSearchSharp onClick={handleSearch}/>
           </div>
         </div>
       </div>
