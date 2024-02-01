@@ -4,10 +4,9 @@ const WeatherCard = () => {
   return (
     <>
       <div className="pb-8">
-        <div className=" flex items-center justify-center md:justify-start md:w-[30%] bg-black rounded-md">
+        <div className=" flex items-center justify-center md:justify-start md:w-[20%] bg-black rounded-md">
           <div className="flex flex-col  rounded p-4 w-full  max-w-xs ">
             <div className="font-bold text-white text-xl">Sydney</div>
-            <div className="text-sm text-white">Thursday 10 May 2020</div>
             <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-white-400 h-24 w-24">
              <img src="https://openweathermap.org/img/wn/03d@2x.png" className="w-[100px] h-auto" alt="" />
             </div>
@@ -31,16 +30,17 @@ const WeatherCard = () => {
             </div>
             <div className="flex flex-row justify-between mt-6 text-white">
               <div className="flex flex-col items-center ">
-                <div className="font-medium text-sm">Wind</div>
+                <div className="font-medium text-sm">Wind Speed</div>
                 <div className="text-sm text-gray-500">9k/h</div>
+                
               </div>
               <div className="flex flex-col items-center">
-                <div className="font-medium text-sm">Humidity</div>
+                 <div className="font-medium text-sm">Humidity</div>
                 <div className="text-sm text-gray-500">68%</div>
               </div>
               <div className="flex flex-col items-center">
-                <div className="font-medium text-sm">Visibility</div>
-                <div className="text-sm text-gray-500">10km</div>
+                <div className="font-medium text-sm">Wind Direction</div>
+                <div className="text-sm text-gray-500">N</div>
               </div>
             </div>
           </div>
