@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
-const Search = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+const Search = ({searchTerm,setSearchTerm}) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleInputChange = (event) => {
