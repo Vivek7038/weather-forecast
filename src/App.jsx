@@ -25,7 +25,8 @@ const App = () => {
   const fetchWeatherForecast = async (lat, lon) => {
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api.key}`
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api.key}`,
+        { mode: 'cors' }
       );
 
       if (response.status !== 200) {
@@ -99,7 +100,8 @@ const App = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=${unit}`
+        `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=${unit}`,
+        { mode: 'cors' }
       );
 
       if (response.status !== 200) {
@@ -125,7 +127,8 @@ const App = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=1&appid=${api.key}`
+        `http://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=1&appid=${api.key}`,
+        { mode: 'cors' }
       );
       const lat = response.data[0].lat;
       const lon = response.data[0].lon;
