@@ -19,14 +19,13 @@ const App = () => {
   //to toggle between celsius and fahrenhiet
   const toggleUnit = () => {
     setUnit(unit === "metric" ? "imperial" : "metric");
-
   };
   //to fetch 5 days forecast
   const fetchWeatherForecast = async (lat, lon) => {
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api.key}`,
-        { mode: 'cors' }
+        { mode: "cors" }
       );
 
       if (response.status !== 200) {
@@ -101,7 +100,7 @@ const App = () => {
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=${unit}`,
-        { mode: 'cors' }
+        { mode: "cors" }
       );
 
       if (response.status !== 200) {
@@ -128,7 +127,7 @@ const App = () => {
     try {
       const response = await axios.get(
         `http://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=1&appid=${api.key}`,
-        { mode: 'cors' }
+        { mode: "cors" }
       );
       const lat = response.data[0].lat;
       const lon = response.data[0].lon;
@@ -149,12 +148,12 @@ const App = () => {
     fetchLatLong();
   }
 
-  // to trigger when toggles between celcius and fehrenhiet 
-  useEffect(()=>{
-    if(latitude!==null && longitude!==null){
-      fetchWeatherData(latitude,longitude);
+  // to trigger when toggles between celcius and fehrenhiet
+  useEffect(() => {
+    if (latitude !== null && longitude !== null) {
+      fetchWeatherData(latitude, longitude);
     }
-  },[unit])
+  }, [unit]);
   return (
     <div className="h-full">
       <h2 className="text-center text-2xl font-bold">
@@ -166,9 +165,9 @@ const App = () => {
           setSearchTerm={setSearchTerm}
           handleSearch={handleSearch}
         />
-       
+
         <TemperatureToggle unit={unit} toggleUnit={toggleUnit} />
-      
+
         <div className="lg:flex sm:flex-row flex-col">
           {isError ? <h1>{error}</h1> : <></>}
           <WeatherCard
