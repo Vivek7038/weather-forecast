@@ -47,6 +47,7 @@ http://localhost:5173/
 
 openweathermap API
 
+https://openweathermap.org/api
 ## Demo
 
 https://weather-forecast-one-gules.vercel.app/
