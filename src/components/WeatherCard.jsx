@@ -10,8 +10,8 @@ const WeatherCard = ({ weatherData,unit, loading }) => {
   return (
     <>
       {weatherData  && (
-         <div className="pb-8">
-         <div className="flex items-center justify-center md:justify-start bg-black rounded-md w-full md:w-5/4 lg:w-[30%]">
+         <div className="pb-8 pr-8">
+         <div className="flex items-center justify-center md:justify-start bg-black rounded-md w-full ">
 
        {loading ? (
         <RotatingLines 

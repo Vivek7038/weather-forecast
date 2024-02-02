@@ -57,7 +57,7 @@ const App = () => {
       }
 
       const data = response.data;
-      const weatherForecastData = await fetchWeatherForecast(lat, lon)
+      // const weatherForecastData = await fetchWeatherForecast(lat, lon)
       setWeatherData(data);
       setLoading(false)
       setSearchTerm("")
@@ -88,11 +88,12 @@ const App = () => {
   }
   useEffect(()=>{
     if(latitude!==null && longitude!==null){
+      return 
       fetchWeatherData(latitude,longitude);
     }
   },[unit])
   return (
-    <div className="">
+    <div className="h-full">
       <h2 className="text-center text-2xl font-bold">
         Weather Forecast Dashboard
       </h2>
@@ -103,6 +104,7 @@ const App = () => {
           handleSearch={handleSearch}
         />
       <TemperatureToggle unit={unit} toggleUnit={toggleUnit}/>
+        <div className="lg:flex flex-row">
         <WeatherCard
          latitude={latitude}
          longitude={longitude}
@@ -111,6 +113,7 @@ const App = () => {
          loading={loading}
         />
         <ForecastCard />
+        </div>
       </div>
 
     </div>
