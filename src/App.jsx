@@ -41,6 +41,7 @@ const App = () => {
      
       setWeatherData(data);
       setLoading(false)
+      setSearchTerm("")
     } catch (error) {
       console.error('Error fetching weather data:', error.message);
       return 
