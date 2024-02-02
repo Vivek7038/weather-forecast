@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WeatherCard from "./components/WeatherCard.jsx";
 import Search from "./components/Search.jsx";
+import ForecastCard from "./components/ForecastCard.jsx";
 import axios from "axios";
 import TemperatureToggle from "./components/TemperatureToggle.jsx";
 
@@ -23,6 +24,24 @@ const App = () => {
   const toggleUnit = () => {
     setUnit(unit === 'metric' ? 'imperial' : 'metric');
   };
+  //to fetch 5 days forecast
+  const fetchWeatherForecast = async (lat, lon) => {
+    try {
+      const response = await axios.get(
+        `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${api.key}`
+      );
+  
+      if (response.status !== 200) {
+        throw new Error(`Failed to fetch weather forecast. Status code: ${response.status}`);
+      }
+      
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching weather forecast:', error.message);
+      throw error; // Rethrow the error to handle it in the calling code
+    }
+  };
+  
   // to fetch weather data based on city latitude and longitude
   const fetchWeatherData = async (lat , lon) => {
     setLoading(true)
@@ -38,7 +57,7 @@ const App = () => {
       }
 
       const data = response.data;
-     
+      const weatherForecastData = await fetchWeatherForecast(lat, lon)
       setWeatherData(data);
       setLoading(false)
       setSearchTerm("")
@@ -91,6 +110,7 @@ const App = () => {
          unit={unit}
          loading={loading}
         />
+        <ForecastCard />
       </div>
 
     </div>
