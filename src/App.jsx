@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import WeatherCard from "./components/WeatherCard.jsx";
 import Search from "./components/Search.jsx";
 import axios from "axios";
+import TemperatureToggle from "./components/TemperatureToggle.jsx";
 
 const api = {
   key: import.meta.env.VITE_API_KEY,
@@ -23,7 +24,7 @@ const App = () => {
     setUnit(unit === 'metric' ? 'imperial' : 'metric');
   };
   // to fetch weather data based on city latitude and longitude
-  const fetchWeatherData = async (lat, lon) => {
+  const fetchWeatherData = async (lat , lon) => {
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=${unit}`
@@ -56,32 +57,38 @@ const App = () => {
       await fetchWeatherData(lat, lon);
       
     } catch (error) {
-      setError(error.message); // Set an error message
+      setError(error.message); 
       setLoading(false);
     }
   };
   function handleSearch() {
     fetchLatLong();
   }
+  useEffect(()=>{
+    if(latitude!==null && longitude!==null){
+      fetchWeatherData(latitude,longitude);
+    }
+  },[unit])
   return (
     <div className="">
       <h2 className="text-center text-2xl font-bold">
         Weather Forecast Dashboard
       </h2>
-      {error}
       <div className="flex flex-col pl-4 pr-4  m-0">
         <Search
           searchTerm={searchTerm}
           setSearchTerm={setSearchTerm}
           handleSearch={handleSearch}
         />
+      <TemperatureToggle unit={unit} toggleUnit={toggleUnit}/>
         <WeatherCard
          latitude={latitude}
          longitude={longitude}
          weatherData={weatherData}
+         unit={unit}
         />
-        <div></div>
       </div>
+
     </div>
   );
 };
