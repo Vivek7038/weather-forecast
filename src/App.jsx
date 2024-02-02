@@ -25,6 +25,7 @@ const App = () => {
   };
   // to fetch weather data based on city latitude and longitude
   const fetchWeatherData = async (lat , lon) => {
+    setLoading(true)
     try {
       const response = await axios.get(
         `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api.key}&units=${unit}`
@@ -39,6 +40,7 @@ const App = () => {
       const data = response.data;
      
       setWeatherData(data);
+      setLoading(false)
     } catch (error) {
       console.error('Error fetching weather data:', error.message);
       return 
@@ -86,6 +88,7 @@ const App = () => {
          longitude={longitude}
          weatherData={weatherData}
          unit={unit}
+         loading={loading}
         />
       </div>
 
