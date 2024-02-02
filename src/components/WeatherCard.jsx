@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { getWindDirection } from "../helpers/helper";
+import iconChanger from "../helpers/iconChanger";
 const WeatherCard = ({ weatherData }) => {
 
   const windDirection = getWindDirection(weatherData?.wind.deg);
@@ -12,8 +13,7 @@ const WeatherCard = ({ weatherData }) => {
            <div className="flex flex-col  rounded p-4 w-full  max-w-xs ">
              <div className="font-bold text-white text-xl">{weatherData?.name}</div>
              <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-white-400 h-24 w-24">
-              <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} className="w-[100px] h-auto" alt="" />
-            
+             {iconChanger(weatherData?.weather[0].main)}
              </div>
              <div className="flex flex-row items-center justify-center mt-6 ">
                <div className="font-medium text-6xl text-white">{`${weatherData.main.temp}°C`}</div>
@@ -36,7 +36,7 @@ const WeatherCard = ({ weatherData }) => {
              <div className="flex flex-row justify-between mt-6 text-white pb-4">
                <div className="flex flex-col items-center ">
                  <div className="font-medium text-sm">Wind Speed</div>
-                 <div className="text-sm text-gray-500">{`${weatherData.wind.speed}k/h`}</div>
+                 <div className="text-sm text-gray-500">{`${weatherData.wind.speed} k/h`}</div>
                  
                </div>
                <div className="flex flex-col items-center">
