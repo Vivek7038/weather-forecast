@@ -6,10 +6,13 @@ const WeatherCard = ({ weatherData,unit, loading }) => {
 
   const windDirection = getWindDirection(weatherData?.wind.deg);
   const unitIcon=(unit=="imperial" ? "°F" : "°C")
-
+  
   return (
     <>
-      {weatherData  && (
+    {loading && <div className="flex flex-row items-center justify-center w-full ">
+       <RotatingLines />
+      </div>}
+      {loading || weatherData && (
          <div className="pb-8 pr-8">
          <div className="flex items-center justify-center md:justify-start bg-black rounded-md w-full ">
 
@@ -23,7 +26,7 @@ const WeatherCard = ({ weatherData,unit, loading }) => {
         <div className="font-bold text-white text-xl">{weatherData?.name}</div>
         <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-white-400 h-24 w-24">
         {iconChanger(weatherData?.weather[0].main)}
-        </div>
+                </div>
         <div className="flex flex-row items-center justify-center mt-6 ">
           <div className="font-medium text-6xl text-white">{`${weatherData.main.temp}${unitIcon}`}</div>
           <div className="flex flex-col items-center ml-6 text-white">

@@ -19,7 +19,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [weatherData, setWeatherData] = useState(null); 
   const [unit, setUnit] = useState('metric'); // Default to Celsius
-
+  const [fiveDayData, setFiveDayData] = useState([]);
   //to toggle between celsius and fahrenhiet
   const toggleUnit = () => {
     setUnit(unit === 'metric' ? 'imperial' : 'metric');
@@ -34,7 +34,7 @@ const App = () => {
       if (response.status !== 200) {
         throw new Error(`Failed to fetch weather forecast. Status code: ${response.status}`);
       }
-      
+      setLoading(false)
       return response.data;
     } catch (error) {
       console.error('Error fetching weather forecast:', error.message);
@@ -42,6 +42,46 @@ const App = () => {
     }
   };
   
+  //to fetch 5 days details
+  const getFiveDayAvgWeather = async (lat, lon, apiKey) => {
+    try {
+      const weatherForecastData = await fetchWeatherForecast(lat, lon, apiKey);
+      const dailyForecasts = weatherForecastData.list.reduce((acc, forecast) => {
+        const date = forecast.dt_txt.split(' ')[0];
+        if (!acc[date]) {
+          acc[date] = {
+            minTemp: forecast.main.temp_min,
+            maxTemp: forecast.main.temp_max,
+            count: 1,
+            weatherDescription: forecast.weather[0].description,
+            weatherIcon: forecast.weather[0].icon,
+          };
+        } else {
+          acc[date].minTemp = Math.min(acc[date].minTemp, forecast.main.temp_min);
+          acc[date].maxTemp = Math.max(acc[date].maxTemp, forecast.main.temp_max);
+          acc[date].count += 1;
+        }
+        return acc;
+      }, {});
+  
+      const calculateAverageTemperature = (minTemp, maxTemp) => {
+        return (minTemp + maxTemp) / 2;
+      };
+
+      const fiveDayAvgWeather = Object.keys(dailyForecasts).map((date) => {
+        const { minTemp, maxTemp, count, weatherDescription, weatherIcon } = dailyForecasts[date];
+        const avgTemperature = calculateAverageTemperature(minTemp, maxTemp);
+        return { date, avgTemperature, weatherDescription, weatherIcon };
+      });
+  
+      console.log('Five-day average weather:');
+      console.log(fiveDayAvgWeather);
+      setFiveDayData(fiveDayAvgWeather)
+    } catch (error) {
+      console.error('Error getting five-day average weather:', error.message);
+    }
+  };
+
   // to fetch weather data based on city latitude and longitude
   const fetchWeatherData = async (lat , lon) => {
     setLoading(true)
@@ -57,9 +97,9 @@ const App = () => {
       }
 
       const data = response.data;
-      // const weatherForecastData = await fetchWeatherForecast(lat, lon)
+      const weatherForecastData = await fetchWeatherForecast(lat, lon)
+      const forecastdata=await getFiveDayAvgWeather(lat, lon,api.key);
       setWeatherData(data);
-      setLoading(false)
       setSearchTerm("")
     } catch (error) {
       console.error('Error fetching weather data:', error.message);
@@ -86,9 +126,10 @@ const App = () => {
   function handleSearch() {
     fetchLatLong();
   }
+
+  // to trigger when toggles between celcius and fehrenhiet 
   useEffect(()=>{
     if(latitude!==null && longitude!==null){
-      return 
       fetchWeatherData(latitude,longitude);
     }
   },[unit])
@@ -112,7 +153,7 @@ const App = () => {
          unit={unit}
          loading={loading}
         />
-        <ForecastCard />
+        <ForecastCard fiveDayData={fiveDayData} loading={loading} unit={unit}/>
         </div>
       </div>
 
