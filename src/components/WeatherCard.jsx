@@ -19,7 +19,7 @@ const WeatherCard = ({ weatherData,unit, loading }) => {
         width="96"
         />
        ):(
-        <div className="flex flex-col  rounded p-4 w-full  max-w-xs ">
+        <div className="flex flex-col  rounded p-4 w-full  max-w-xs flex-wrap">
         <div className="font-bold text-white text-xl">{weatherData?.name}</div>
         <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-white-400 h-24 w-24">
         {iconChanger(weatherData?.weather[0].main)}

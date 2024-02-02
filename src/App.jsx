@@ -104,7 +104,7 @@ const App = () => {
           handleSearch={handleSearch}
         />
       <TemperatureToggle unit={unit} toggleUnit={toggleUnit}/>
-        <div className="lg:flex flex-row">
+        <div className="lg:flex sm:flex-row flex-col">
         <WeatherCard
          latitude={latitude}
          longitude={longitude}
