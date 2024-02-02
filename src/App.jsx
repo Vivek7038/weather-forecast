@@ -127,7 +127,7 @@ const App = () => {
     try {
       const response = await axios.get(
         `http://api.openweathermap.org/geo/1.0/direct?q=${searchTerm}&limit=1&appid=${api.key}`,
-        { mode: "cors" }
+        { mode: "no-cors" }
       );
       const lat = response.data[0].lat;
       const lon = response.data[0].lon;
