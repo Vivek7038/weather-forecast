@@ -1,7 +1,9 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { getWindDirection } from "../helpers/helper";
 const WeatherCard = ({ weatherData }) => {
-  console.log(weatherData)
+
+  const windDirection = getWindDirection(weatherData?.wind.deg);
+  
   return (
     <>
       {weatherData && (
@@ -10,7 +12,8 @@ const WeatherCard = ({ weatherData }) => {
            <div className="flex flex-col  rounded p-4 w-full  max-w-xs ">
              <div className="font-bold text-white text-xl">{weatherData?.name}</div>
              <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-white-400 h-24 w-24">
-              <img src={`https://openweathermap.org/img/wn/10d@2x.png`} className="w-[100px] h-auto" alt="" />
+              <img src={`https://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`} className="w-[100px] h-auto" alt="" />
+            
              </div>
              <div className="flex flex-row items-center justify-center mt-6 ">
                <div className="font-medium text-6xl text-white">{`${weatherData.main.temp}°C`}</div>
@@ -42,7 +45,7 @@ const WeatherCard = ({ weatherData }) => {
                </div>
                <div className="flex flex-col items-center">
                  <div className="font-medium text-sm">Wind Direction</div>
-                 <div className="text-sm text-gray-500">{`${weatherData.wind.deg}°`}</div>
+                 <div className="text-sm text-gray-500">{windDirection}</div>
                </div>
              </div>
            </div>
