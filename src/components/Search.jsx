@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { IoSearchSharp } from "react-icons/io5";
+
 const Search = ({searchTerm,setSearchTerm,handleSearch}) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -15,8 +16,11 @@ const Search = ({searchTerm,setSearchTerm,handleSearch}) => {
     setIsFocused(false);
   };
 
-
-
+ const handelKeyDown=(e)=>{
+  if (e.key === "Enter") {
+    handleSearch();
+  }
+}
   return (
     <>
       <div className="pt-9 pl-2 pr-2 pb-3 ">
@@ -32,6 +36,9 @@ const Search = ({searchTerm,setSearchTerm,handleSearch}) => {
             onChange={handleInputChange}
             onFocus={handleFocus}
             onBlur={handleBlur}
+            onKeyDown={(e)=>{
+              handelKeyDown(e)
+            }}
             className="w-full h-12 px-4 py-2 border rounded-md outline-none focus:ring-transparent"
           />
           <div className="absolute top-0 right-0 h-full flex items-center pr-4">
