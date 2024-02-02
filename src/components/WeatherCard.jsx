@@ -13,7 +13,10 @@ const WeatherCard = ({ weatherData,unit, loading }) => {
          <div className="pb-8">
          <div className=" flex items-center justify-center md:justify-start md:w-[20%] bg-black rounded-md">
        {loading ? (
-        <RotatingLines />
+        <RotatingLines 
+        height="96"
+        width="96"
+        />
        ):(
         <div className="flex flex-col  rounded p-4 w-full  max-w-xs ">
         <div className="font-bold text-white text-xl">{weatherData?.name}</div>

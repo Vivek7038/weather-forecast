@@ -42,7 +42,7 @@ const Search = ({searchTerm,setSearchTerm,handleSearch}) => {
             className="w-full h-12 px-4 py-2 border rounded-md outline-none focus:ring-transparent"
           />
           <div className="absolute top-0 right-0 h-full flex items-center pr-4">
-              <IoSearchSharp onClick={handleSearch}/>
+              <IoSearchSharp onClick={handleSearch} className="cursor-pointer w-8 h-6"/>
           </div>
         </div>
       </div>
