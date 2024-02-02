@@ -84,8 +84,7 @@ const App = () => {
         return { date, avgTemperature, weatherDescription, weatherIcon };
       });
 
-      console.log("Five-day average weather:");
-      console.log(fiveDayAvgWeather);
+     
       setFiveDayData(fiveDayAvgWeather);
     } catch (error) {
       console.error("Error getting five-day average weather:", error.message);

@@ -11,7 +11,7 @@ const ForecastCard = ({ fiveDayData, loading, unit }) => {
       {fiveDayData && !loading && (
         <div className="flex flex-row  flex-wrap gap-b-12 lg:gap-x-3 mt-8  dark:text-gray-400">
           {fiveDayData.slice(1).map((data, index) => (
-            <div className="flex flex-col items-center space-y-1">
+            <div className="flex flex-col items-center space-y-1" key={index}>
               <span className="uppercase">{formatDate(data.date)}</span>
               <div className="mt-6 text-6xl self-center inline-flex items-center justify-center rounded-lg text-white-400 h-24 w-24">
                 {ForecastIconChanger(data.weatherDescription)}
